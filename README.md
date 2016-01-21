@@ -1,11 +1,14 @@
-"TaskLoop" is category of NSArray designed to manage asynchronous tasks in loop. 
+# TaskLoop
 
-Problem
-----------------------------------------------------------------------------------------
+'TaskLoop' is category of NSArray designed to manage asynchronous tasks in loop. 
+
+## Problem
 let say you are calling a function in for loop
-    [self.arrImages enumerateObjectsUsingBlock:^(id  _Nonnull URL, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self downloadImageWithURL:URL]
-    }];
+
+```objective-c
+[self.arrImages enumerateObjectsUsingBlock:^(id  _Nonnull URL, NSUInteger idx, BOOL * _Nonnull stop) {
+	[self downloadImageWithURL:URL]
+}];
 
 -(void)downloadImageWithURL:(NSURL*)url{
 
@@ -13,19 +16,19 @@ let say you are calling a function in for loop
     }];
     [downloadTask resume];
 }
+```
 
 Here 'downloadImageWithURL:' is asynch function so our loop will not wait until image download it will call function and continue to next iteration. But let say you want to stop for loop until image has been downloaded?
-----------------------------------------------------------------------------------------
 
-Solution
----------------------------------------------------------------------------------------- 
-Use "NSArray+TaskLoop.h" category and use 'enumerateTaskSequentially' like 
+## Problem
+import "NSArray+TaskLoop.h" category and use 'enumerateTaskSequentially' like 
 
-    [array enumerateTaskSequentially:^(id URL, NSUInteger idx, BlockTaskCompletion completion) {
-        [self downloadImageWithURL:URL withCompletion:completion];
-    } blockCompleteAllTask:^{
-        NSLog(@"all task completed");
-    }];
+```objective-c
+[array enumerateTaskSequentially:^(id URL, NSUInteger idx, BlockTaskCompletion completion) {
+    [self downloadImageWithURL:URL withCompletion:completion];
+} blockCompleteAllTask:^{
+    NSLog(@"all task completed");
+}];
 
 //add completion in function pararmete
 -(void)downloadImageWithURL:(NSURL*)url withCompletion:(BlockTaskCompletion)completion{
@@ -34,6 +37,5 @@ Use "NSArray+TaskLoop.h" category and use 'enumerateTaskSequentially' like
        completion(nil);
     }];
     [downloadTask resume];
-
 }
-----------------------------------------------------------------------------------------
+```
