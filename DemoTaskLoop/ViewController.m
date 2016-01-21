@@ -33,44 +33,41 @@
 
 -(IBAction)btnSequentiallyCalled:(id)sender{
     
+    
+    
     [self.arrImages enumerateTaskSequentially:^(id obj, NSUInteger idx, BlockTaskCompletion completion) {
         NSLog(@"task %d start",(int)idx+1);
-        
         NSURL *url = [NSURL URLWithString:obj];
-        NSURLSessionDownloadTask *downloadTask =  [[NSURLSession sharedSession] downloadTaskWithURL:url completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            
-            NSLog(@"task %d completed",(int)idx+1);
-            //download completed so Call 'completion' block
-            //This is important - Do not forgot to call 'completion' block after task completed
-            //'completion' block indicate that this task is now completed and our task manager can move on.
-            completion(nil);
-        }];
-        [downloadTask resume];
+        [self downloadImageWithURL:url withCompletion:completion];
+        
     } blockCompleteAllTask:^{
         NSLog(@"all task completed");
     }];
-    
-    
 }
 -(IBAction)btnParallelyCalled:(id)sender{
     
     [self.arrImages enumerateTaskParallely:^(id obj, NSUInteger idx, BlockTaskCompletion completion) {
         NSLog(@"task %d start",(int)idx+1);
         NSURL *url = [NSURL URLWithString:obj];
-        NSURLSessionDownloadTask *downloadTask =  [[NSURLSession sharedSession] downloadTaskWithURL:url completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            
-            NSLog(@"task %d completed",(int)idx+1);
-            //download completed so Call 'completion' block
-            //This is important - Do not forgot to call 'completion' block after task completed
-            //'completion' block indicate that this task is now completed and our task manager can move on.
-            completion(nil);
-        }];
-        [downloadTask resume];
+        [self downloadImageWithURL:url withCompletion:completion];
         
     } blockCompleteAllTask:^{
         NSLog(@"all task completed");
     }];
     
+}
+
+-(void)downloadImageWithURL:(NSURL*)url withCompletion:(BlockTaskCompletion)completion{
+
+    NSURLSessionDownloadTask *downloadTask =  [[NSURLSession sharedSession] downloadTaskWithURL:url completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        //download completed so Call 'completion' block
+        //This is important - Do not forgot to call 'completion' block after task completed
+        //'completion' block indicate that this task is now completed and our task manager can move on.
+        completion(nil);
+    }];
+    [downloadTask resume];
+
 }
 
 - (void)didReceiveMemoryWarning {
