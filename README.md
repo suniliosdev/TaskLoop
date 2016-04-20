@@ -1,5 +1,7 @@
 # TaskLoop
 
+[![Join the chat at https://gitter.im/SunilSpaceo/DemoTaskLoop](https://badges.gitter.im/SunilSpaceo/DemoTaskLoop.svg)](https://gitter.im/SunilSpaceo/DemoTaskLoop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 'TaskLoop' is category of NSArray designed to manage asynchronous tasks in loop. 
 
 ## Problem
