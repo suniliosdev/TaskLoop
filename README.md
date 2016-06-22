@@ -20,7 +20,7 @@ let say you are calling a function in for loop
 }
 ```
 
-Here 'downloadImageWithURL:' is asynch function so our loop will not wait until image download it will call function and continue to next iteration. But let say you want to stop for loop until image has been downloaded?
+Here 'downloadImageWithURL:' is asynch function so our loop will not wait until image download. It will call function and continue to next iteration. But let say you want to stop for loop until image has been downloaded?
 
 ## Solution
 import "NSArray+TaskLoop.h" category and use 'enumerateTaskSequentially' like 
