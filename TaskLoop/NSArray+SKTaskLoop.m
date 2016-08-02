@@ -1,14 +1,14 @@
 //
-//  NSArray+TaskLoop.m
+//  NSArray+SKTaskLoop.m
 //  DemoTaskLoop
 //
-//  Created by Sunil on 1/20/16.
+//  Created by Sunil on 6/13/16.
 //  Copyright © 2016 Sunil. All rights reserved.
 //
 
-#import "NSArray+TaskLoop.h"
+#import "NSArray+SKTaskLoop.h"
 
-@implementation NSArray (TaskLoop)
+@implementation NSArray (SKTaskLoop)
 
 
 

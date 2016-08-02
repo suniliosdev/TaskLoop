@@ -33,8 +33,6 @@
 
 -(IBAction)btnSequentiallyCalled:(id)sender{
     
-    
-    
     [self.arrImages enumerateTaskSequentially:^(id obj, NSUInteger idx, BlockTaskCompletion completion) {
         NSLog(@"task %d start",(int)idx+1);
         NSURL *url = [NSURL URLWithString:obj];
