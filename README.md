@@ -1,43 +1,8 @@
-# TaskLoop
+# TaskLoop Category
 
-[![Join the chat at https://gitter.im/SunilSpaceo/DemoTaskLoop](https://badges.gitter.im/SunilSpaceo/DemoTaskLoop.svg)](https://gitter.im/SunilSpaceo/DemoTaskLoop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+This tutorial guides you to manage parallel and sequential tasks in loop for iOS app development. You will learn fundamentals of sequential task and parallel task in the simple written steps. 
 
-'TaskLoop' is category of NSArray designed to manage asynchronous tasks in loop. 
 
-## Problem
-let say you are calling a function in for loop
+Check out this step by step guide on how to [manage parallel and sequential tasks in loop For iOS App Development](https://www.applozic.com/blog/easy-way-to-manage-parallel-and-sequential-tasks-in-loop-for-ios-app-development/)
 
-```objective-c
-[self.arrImages enumerateObjectsUsingBlock:^(id  _Nonnull URL, NSUInteger idx, BOOL * _Nonnull stop) {
-	[self downloadImageWithURL:URL]
-}];
-
--(void)downloadImageWithURL:(NSURL*)url{
-
-    NSURLSessionDownloadTask *downloadTask =  [[NSURLSession sharedSession] downloadTaskWithURL:url completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-    }];
-    [downloadTask resume];
-}
-```
-
-Here 'downloadImageWithURL:' is asynch function so our loop will not wait until image download. It will call function and continue to next iteration. But let say you want to stop for loop until image has been downloaded?
-
-## Solution
-import "NSArray+TaskLoop.h" category and use 'enumerateTaskSequentially' like 
-
-```objective-c
-[array enumerateTaskSequentially:^(id URL, NSUInteger idx, BlockTaskCompletion completion) {
-    [self downloadImageWithURL:URL withCompletion:completion];
-} blockCompleteAllTask:^{
-    NSLog(@"all task completed");
-}];
-
-//add completion in function pararmete
--(void)downloadImageWithURL:(NSURL*)url withCompletion:(BlockTaskCompletion)completion{
-    NSURLSessionDownloadTask *downloadTask =  [[NSURLSession sharedSession] downloadTaskWithURL:url completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-       //IMPORTANT: download completed so Call 'completion' block
-       completion(nil);
-    }];
-    [downloadTask resume];
-}
-```
+I am Sr. iPhone Developer at [@Spaceotech](https://github.com/spaceotech), trusted [iPhone app development](https://www.spaceotechnologies.com/iphone-app-development/) company in India. Apart from coding, I love exploring new programming languages and their abilities.
